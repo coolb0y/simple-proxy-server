@@ -1,19 +1,20 @@
 const express = require('express');
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware} = require('http-proxy-middleware');
 const btoa = require('btoa');
 const app = express();
 const bodyParser = require('body-parser')
-
+const cors = require('cors')
 /* This is where we specify options for the http-proxy-middleware
  * We set the target to appbase.io backend here. You can also
  * add your own backend url here */
 const options = {
-    target: 'https://scalr.api.appbase.io/',
+    target: 'https://localhost:9200/',
+	secure: false,
     changeOrigin: true,
     onProxyReq: (proxyReq, req) => {
         proxyReq.setHeader(
             'Authorization',
-            `Basic ${btoa('cf7QByt5e:d2d60548-82a9-43cc-8b40-93cbbe75c34c')}`
+            `Basic ${btoa('reactive:password')}`
         );
         /* transform the req body back from text */
         const { body } = req;
@@ -27,6 +28,8 @@ const options = {
     }
 }
 
+app.use(cors());
+
 /* Parse the ndjson as text */
 app.use(bodyParser.text({ type: 'application/x-ndjson' }));
 
@@ -36,13 +39,19 @@ app.use(bodyParser.text({ type: 'application/x-ndjson' }));
 app.use((req, res, next) => {
     const { body } = req;
     console.log('Verifying requests ✔', body);
-    /* After this we call next to tell express to proceed
-     * to the next middleware function which happens to be our
-     * proxy middleware */
+      // After this we call next to tell express to proceed
+     // to the next middleware function which happens to be our
+    // proxy middleware 
     next();
 })
 
+const sortFunction = (req,res)=>{
+console.log(req,res);
+
+}
+
+
 /* Here we proxy all the requests from reactivesearch to our backend */
-app.use('*', proxy(options));
+app.use('*',createProxyMiddleware(options),sortFunction);
 
 app.listen(7777, () => console.log('Server running at http://localhost:7777 🚀'));

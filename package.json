@@ -1,26 +1,25 @@
 {
   "name": "reactivesearch-proxy-server",
   "version": "1.0.0",
-  "description": "A middleware to demonstrate how to secure reactivesearch",
+  "description": "A middleware to demonstrate how to secure reactivesearch using a simple Node/Express server. Here I'm using [`http-proxy-middleware`](https://github.com/chimurai/http-proxy-middleware) for brevity however the logic can be extended easily with express based routing.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "reactivesearch",
-    "nodejs",
-    "elasticsearch",
-    "secure",
-    "proxy-server",
-    "middleware"
-  ],
-  "author": "Divyanshu Maithani <div.blackcat@gmail.com>",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appbaseio-apps/reactivesearch-proxy-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/appbaseio-apps/reactivesearch-proxy-server/issues"
+  },
+  "homepage": "https://github.com/appbaseio-apps/reactivesearch-proxy-server#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "btoa": "^1.1.2",
-    "express": "^4.16.2",
-    "http-proxy-middleware": "^0.17.4"
+    "btoa": "^1.2.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "http-proxy-middleware": "^2.0.6"
   }
 }
