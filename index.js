@@ -8,13 +8,13 @@ const cors = require('cors')
  * We set the target to appbase.io backend here. You can also
  * add your own backend url here */
 const options = {
-    target: 'https://localhost:9200/',
+    target: 'http://localhost:9200/',
 	secure: false,
     changeOrigin: true,
     onProxyReq: (proxyReq, req) => {
         proxyReq.setHeader(
             'Authorization',
-            `Basic ${btoa('reactive:password')}`
+            `Basic ${btoa('admin:admin')}`
         );
         /* transform the req body back from text */
         const { body } = req;
